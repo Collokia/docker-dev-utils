@@ -33,16 +33,29 @@ RUN mkdir -p /tmp/build /opt \
       && ln -s /usr/lib/jvm/java-8-oracle /opt/jdk-8 \
       && ln -s /usr/lib/jvm/java-1.6.0-openjdk-amd64 /opt/open-jdk-6 \
       && ln -s /usr/lib/jvm/java-1.7.0-openjdk-amd64 /opt/open-jdk-7 \
-      && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz -C /opt && ln -s /opt/apache-ant-${APACHE_ANT_1_8_VERSION} /opt/ant-1.8 \
-      && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz -C /opt && ln -s /opt/apache-ant-${APACHE_ANT_1_9_VERSION} /opt/ant-1.9 \
-      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_3_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
-      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_4_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
-      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_5_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
-      && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt \
+      && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz \
+      && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz -C /opt \
+      && ln -s /opt/apache-ant-${APACHE_ANT_1_8_VERSION} /opt/ant-1.8 \
+      && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz \
+      && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz -C /opt \
+      && ln -s /opt/apache-ant-${APACHE_ANT_1_9_VERSION} /opt/ant-1.9 \
+      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_3_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
+      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
+      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_4_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
+      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
+      && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_5_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
+      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
+      && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz \
+      && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
+      && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt \
       && ln -s /opt/maven-${MAVEN_3_3_VERSION} /opt/maven-3.3 \
-      && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_2_VERSION}/binaries/apache-maven-${MAVEN_3_2_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt \ 
+      && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_2_VERSION}/binaries/apache-maven-${MAVEN_3_2_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz \
+      && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
+      && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt \ 
       && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \       
-      && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip && unzip -d /tmp/build /tmp/build/awscli-bundle.zip && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
+      && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
+      && unzip -d /tmp/build /tmp/build/awscli-bundle.zip \
+      && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
       && apt-get purge -y --auto-remove python-software-properties software-properties-common \
       && add-apt-repository -y --remove ppa:webupd8team/java \
       && apt-get clean -y \
