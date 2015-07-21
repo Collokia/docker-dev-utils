@@ -12,8 +12,9 @@ RUN mkdir -p /tmp/build /opt \
       && echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
       && echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
       && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
-      && apt-get -y install --allow-unauthenticated --no-install-recommends software-properties-common \
-      && add-apt-repository -y ppa:webupd8team/java \
+      && apt-get -y install --allow-unauthenticated --no-install-recommends software-properties-common 
+    
+RUN add-apt-repository -y ppa:webupd8team/java \
       && apt-get -y update \
       && apt-get -y install --allow-unauthenticated --no-install-recommends  \
 			wget \
@@ -32,8 +33,9 @@ RUN mkdir -p /tmp/build /opt \
       && ln -s /usr/lib/jvm/java-7-oracle /opt/jdk-7 \
       && ln -s /usr/lib/jvm/java-8-oracle /opt/jdk-8 \
       && ln -s /usr/lib/jvm/java-1.6.0-openjdk-amd64 /opt/open-jdk-6 \
-      && ln -s /usr/lib/jvm/java-1.7.0-openjdk-amd64 /opt/open-jdk-7 \
-      && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz \
+      && ln -s /usr/lib/jvm/java-1.7.0-openjdk-amd64 /opt/open-jdk-7 
+
+RUN wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz \
       && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz -C /opt \
       && ln -s /opt/apache-ant-${APACHE_ANT_1_8_VERSION} /opt/ant-1.8 \
       && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz \
@@ -56,8 +58,8 @@ RUN mkdir -p /tmp/build /opt \
       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
       && unzip -d /tmp/build /tmp/build/awscli-bundle.zip \
       && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
-      && apt-get purge -y --auto-remove python-software-properties software-properties-common \
       && add-apt-repository -y --remove ppa:webupd8team/java \
+      && apt-get purge -y --auto-remove python-software-properties software-properties-common \
       && apt-get clean -y \
       && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
       && rm -rf /var/cache/oracle* 
