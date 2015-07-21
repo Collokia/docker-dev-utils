@@ -12,10 +12,10 @@ RUN mkdir -p /tmp/build /opt \
       && echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
       && echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
       && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
-      && apt-get -y install software-properties-common \
+      && apt-get -y install --allow-unauthenticated --no-install-recommends software-properties-common \
       && add-apt-repository -y ppa:webupd8team/java \
       && apt-get -y update \
-      && apt-get -y install \
+      && apt-get -y install --allow-unauthenticated --no-install-recommends  \
 			wget \
 			curl \
 			unzip \
@@ -40,4 +40,6 @@ RUN mkdir -p /tmp/build /opt \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_5_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
       && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt && ln -s /opt/maven-${MAVEN_3_3_VERSION} /opt/maven-3.3 \
       && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_2_VERSION}/binaries/apache-maven-${MAVEN_3_2_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip && unzip -d /tmp/build /tmp/build/awscli-bundle.zip && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
-      && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+      && apt-get purge -y --auto-remove python-software-properties software-properties-common 
+      && add-apt-repository -y --remove ppa:webupd8team/java 
+      && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && rm -rf /var/cache/oracle* 
