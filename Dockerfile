@@ -11,6 +11,10 @@ ENV MAVEN_3_3_VERSION 3.3.3
 ENV MAVEN_3_2_VERSION 3.2.1
 ENV MAVEN_CURRENT 3.3
 
+ENV ANT_HOME /opt/ant
+ENV GRADLE_HOME /opt/gradle
+ENV MAVEN_HOME /opt/maven
+
 VOLUME "/root/.docker"
 
 RUN mkdir -p /tmp/build /opt \
