@@ -75,9 +75,8 @@ RUN mkdir -p /tmp/build /opt \
       && echo "Install Docker" \
       && wget -qO- https://get.docker.com/ | sh \
       && echo "Cleanup" \
-      && add-apt-repository -y --remove ppa:webupd8team/java \
       && apt-get purge -y python-software-properties software-properties-common \
       && apt-get autoremove -y \
       && apt-get clean -y \
-      && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+      && rm -rf /tmp/* /var/tmp/* \
       && rm -rf /var/cache/oracle* 
