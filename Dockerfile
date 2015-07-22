@@ -58,7 +58,7 @@ RUN mkdir -p /tmp/build /opt \
       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
       && unzip -d /tmp/build /tmp/build/awscli-bundle.zip \
       && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
-      && wget -qO- https://get.docker.com/ | sh
+      && wget -qO- https://get.docker.com/ | sh \
       && add-apt-repository -y --remove ppa:webupd8team/java \
       && apt-get purge -y --auto-remove python-software-properties software-properties-common \
       && apt-get clean -y \
