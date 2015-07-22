@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:15.04
 
 ENV APACHE_ANT_1_8_VERSION=1.8.4 \
     APACHE_ANT_1_9_VERSION=1.9.5 \
