@@ -8,7 +8,6 @@ ENV GRADLE_2_4_VERSION 2.4
 ENV GRADLE_2_5_VERSION 2.5
 ENV GRADLE_CURRENT 2.5
 ENV MAVEN_3_3_VERSION 3.3.3
-ENV MAVEN_3_2_VERSION 3.2.1
 ENV MAVEN_CURRENT 3.3
 
 ENV ANT_HOME /opt/ant
@@ -65,15 +64,9 @@ RUN mkdir -p /tmp/build /opt \
       && echo "Link current Gradle" \
       && ln -s /opt/gradle-${GRADLE_CURRENT} /opt/gradle \
       && echo "Install Maven 3.3.x" \
-      && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz \
-      && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
+      && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz \
       && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt \
       && ln -s /opt/maven-${MAVEN_3_3_VERSION} /opt/maven-3.3 \
-      && echo "Install Maven 3.2.x" \
-      && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_2_VERSION}/binaries/apache-maven-${MAVEN_3_2_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz \
-      && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
-      && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt \ 
-      && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \    
       && echo "Link current Maven" \
       && ln -s /opt/maven-${MAVEN_CURRENT} /opt/maven \
       && echo "Install Amazon AWS CLI" \
