@@ -2,11 +2,14 @@ FROM ubuntu
 
 ENV APACHE_ANT_1_8_VERSION 1.8.4
 ENV APACHE_ANT_1_9_VERSION 1.9.5
+ENV ANT_CURRENT 1.9
 ENV GRADLE_2_3_VERSION 2.3
 ENV GRADLE_2_4_VERSION 2.4
 ENV GRADLE_2_5_VERSION 2.5
+ENV GRADLE_CURRENT 2.5
 ENV MAVEN_3_3_VERSION 3.3.3
 ENV MAVEN_3_2_VERSION 3.2.1
+ENV MAVEN_CURRENT 3.3
 
 VOLUME "/root/.docker"
 
@@ -35,30 +38,46 @@ RUN mkdir -p /tmp/build /opt \
       && ln -s /usr/lib/jvm/java-8-oracle /opt/jdk-8 \
       && ln -s /usr/lib/jvm/java-1.6.0-openjdk-amd64 /opt/open-jdk-6 \
       && ln -s /usr/lib/jvm/java-1.7.0-openjdk-amd64 /opt/open-jdk-7 \
+      && echo "Install Ant 1.8.x" \
       && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz \
       && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_8_VERSION}-bin.tgz -C /opt \
       && ln -s /opt/apache-ant-${APACHE_ANT_1_8_VERSION} /opt/ant-1.8 \
+      && echo "Install Ant 1.9.x" \
       && wget http://archive.apache.org/dist/ant/binaries/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tar.gz -O /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz \
       && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz -C /opt \
       && ln -s /opt/apache-ant-${APACHE_ANT_1_9_VERSION} /opt/ant-1.9 \
+      && echo "Link current Ant" \
+      && ln -s /opt/ant-${ANT_CURRENT} /opt/ant \
+      && echo "Install Gradle 2.3.x" \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_3_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
       && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
+      && echo "Install Gradle 2.4.x" \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_4_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
       && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
+      && echo "Install Gradle 2.5.x" \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_5_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
       && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
+      && echo "Link current Gradle" \
+      && ln -s /opt/gradle-${GRADLE_CURRENT} /opt/gradle \
+      && echo "Install Maven 3.3.x" \
       && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz \
       && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
       && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt \
       && ln -s /opt/maven-${MAVEN_3_3_VERSION} /opt/maven-3.3 \
+      && echo "Install Maven 3.2.x" \
       && wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_3_2_VERSION}/binaries/apache-maven-${MAVEN_3_2_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz \
       && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
       && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt \ 
-      && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \       
+      && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \    
+      && echo "Link current Maven" \
+      && ln -s /opt/maven-${MAVEN_CURRENT} /opt/maven \
+      && echo "Install Amazon AWS CLI" \
       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
       && unzip -o -d /tmp/build /tmp/build/awscli-bundle.zip \
       && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
+      && echo "Install Docker" \
       && wget -qO- https://get.docker.com/ | sh \
+      && echo "Cleanup" \
       && add-apt-repository -y --remove ppa:webupd8team/java \
       && apt-get purge -y --auto-remove python-software-properties software-properties-common \
       && apt-get clean -y \
