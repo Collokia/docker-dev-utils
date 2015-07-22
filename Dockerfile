@@ -16,9 +16,9 @@ ENV APACHE_ANT_1_8_VERSION=1.8.4 \
 VOLUME "/root/.docker"
 
 RUN mkdir -p /tmp/build /opt \
-      && echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
-      && echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
-      && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections \
+      && echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
+      && echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
+      && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
       && apt-get -y install --allow-unauthenticated --no-install-recommends software-properties-common \
       && add-apt-repository -y ppa:webupd8team/java \
       && apt-get -y update \
@@ -71,7 +71,7 @@ RUN mkdir -p /tmp/build /opt \
       && echo "Install Amazon AWS CLI" \
       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
       && unzip -o -d /tmp/build /tmp/build/awscli-bundle.zip \
-      && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
+      && /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
       && echo "Install Docker" \
       && wget -qO- https://get.docker.com/ | sh \
       && echo "Cleanup" \
