@@ -42,11 +42,11 @@ RUN mkdir -p /tmp/build /opt \
       && tar -xzf /tmp/build/apache-ant-${APACHE_ANT_1_9_VERSION}-bin.tgz -C /opt \
       && ln -s /opt/apache-ant-${APACHE_ANT_1_9_VERSION} /opt/ant-1.9 \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_3_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
-      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
+      && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_3_VERSION}-bin.zip \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_4_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
-      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
+      && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_4_VERSION}-bin.zip \
       && wget https://services.gradle.org/distributions/gradle-${GRADLE_2_5_VERSION}-bin.zip -O /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
-      && unzip -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
+      && unzip -o -d /opt/ /tmp/build/gradle-${GRADLE_2_5_VERSION}-bin.zip \
       && wget http://apache.mirror.gtcomm.net/maven/maven-3/${MAVEN_3_3_VERSION}/binaries/apache-maven-${MAVEN_3_3_VERSION}-bin.tar.gz -O /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz \
       && mkdir -p /opt/maven-${MAVEN_3_3_VERSION} \
       && tar -xzf /tmp/build/maven-${MAVEN_3_3_VERSION}-bin.tar.gz -C /opt \
@@ -56,7 +56,7 @@ RUN mkdir -p /tmp/build /opt \
       && tar -xzf /tmp/build/maven-${MAVEN_3_2_VERSION}-bin.tar.gz -C /opt \ 
       && ln -s /opt/maven-${MAVEN_3_2_VERSION} /opt/maven-3.2 \       
       && curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o /tmp/build/awscli-bundle.zip \
-      && unzip -d /tmp/build /tmp/build/awscli-bundle.zip \
+      && unzip -o -d /tmp/build /tmp/build/awscli-bundle.zip \
       && sudo /tmp/build/awscli-bundle/install -i /usr/local/bin/aws \
       && wget -qO- https://get.docker.com/ | sh \
       && add-apt-repository -y --remove ppa:webupd8team/java \
