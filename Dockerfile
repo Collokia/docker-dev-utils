@@ -23,12 +23,12 @@ RUN mkdir -p /tmp/build /opt \
       && add-apt-repository -y ppa:webupd8team/java \
       && apt-get -y update \
       && apt-get -y install --allow-unauthenticated --no-install-recommends  \
+                        openssh-client \
 			wget \
 			curl \
 			unzip \
 			python \
-                        openssh-client \
-			git \
+                      	git \
 			node.js \
 			openjdk-6-jdk \
 			openjdk-7-jdk \
@@ -76,7 +76,7 @@ RUN mkdir -p /tmp/build /opt \
       && wget -qO- https://get.docker.com/ | sh \
       && echo "Cleanup" \
       && add-apt-repository -y --remove ppa:webupd8team/java \
-      && apt-get purge -y --auto-remove python-software-properties software-properties-common \
+      && apt-get purge -y python-software-properties software-properties-common \
       && apt-get clean -y \
       && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
       && rm -rf /var/cache/oracle* 
