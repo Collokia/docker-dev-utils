@@ -23,18 +23,18 @@ RUN mkdir -p /tmp/build /opt \
       && add-apt-repository -y ppa:webupd8team/java \
       && apt-get -y update \
       && apt-get -y install --allow-unauthenticated --no-install-recommends  \
-                        openssh-client \
+                        openssh-client+ \
 			wget \
 			curl \
 			unzip \
 			python \
-                      	git \
-			node.js \
-			openjdk-6-jdk \
-			openjdk-7-jdk \
-			oracle-java6-installer \
-			oracle-java7-installer \
-			oracle-java8-installer \
+                      	git+ \
+			node.js+ \
+			openjdk-6-jdk+ \
+			openjdk-7-jdk+ \
+			oracle-java6-installer+ \
+			oracle-java7-installer+ \
+			oracle-java8-installer+ \
       && update-java-alternatives -s java-8-oracle \
       && ln -s /usr/lib/jvm/java-6-oracle /opt/jdk-6 \
       && ln -s /usr/lib/jvm/java-7-oracle /opt/jdk-7 \
@@ -77,6 +77,7 @@ RUN mkdir -p /tmp/build /opt \
       && echo "Cleanup" \
       && add-apt-repository -y --remove ppa:webupd8team/java \
       && apt-get purge -y python-software-properties software-properties-common \
+      && apt-get autoremove -y \
       && apt-get clean -y \
       && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
       && rm -rf /var/cache/oracle* 
