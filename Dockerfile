@@ -29,6 +29,7 @@ RUN mkdir -p /tmp/build /opt \
 			curl \
 			unzip \
 			python \
+                        openssh-client \
 			git \
 			node.js \
 			openjdk-6-jdk \
